@@ -1,0 +1,108 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='exa -laghUu --color=always --sort=type'
+alias grep='grep --color=auto'
+alias uptime='uptime --pretty'
+alias rm='trash-put'
+alias rmf='/bin/rm -f'
+alias cdb='cd $OLDPWD'
+PS2='\e[1;36m[Ext-stdin]\e[m\n>> '
+
+PROMPT_COMMAND=__prompt_command
+
+function __prompt_command () {
+    local cmd_status=$?
+    local cmd_date="\e[1;33m\d \t\e[m"
+    local user_and_hostname="(\e[0;31m\u\e[m@\e[1;34m\h\e[m)"
+    local current_dir="[\e[0;36m\W$(gitornot)\e[m]"
+    PS1="$cmd_date\n$user_and_hostname $current_dir $(exitcode $cmd_status)\n(Bash) > "
+}
+
+function gitornot () {
+    git status &> /dev/null
+    status=$?
+    if [[ $status == 0 ]]; then
+        echo -e "\e[1;32m ($(git branch --show-current | grep -Po '[A-Za-z0-9]+'))\e[m"
+    else
+        echo -e ''
+    fi
+}
+
+function exitcode () {
+    case "$1" in
+        "0") echo -e "(\e[0;32mSuccess\e[m)" ;;
+        "1") echo -e "(\e[1;31mFail\e[m)" ;;
+        "2") echo -e "(\e[1;31mSyntax\e[m)" ;;
+        "126") echo -e "(\e[1;31mPermission\e[m)" ;;
+        "127") echo -e "(\e[1;31mNot Found\e[m)" ;;
+        "130") echo -e "(\e[1;31mSIGINT\e[m)" ;;
+        "137") echo -e "(\e[1;31mSIGKILL\e[m)" ;;
+        "143") echo -e "(\e[1;31mSIGTERM\e[m)" ;;
+        *) echo -e "(\e[1;31m$1\e[m)" ;;
+    esac
+}
+
+function pinMicVol100 () {
+    while amixer set Capture 20%+; do clear; sleep 0.05; done
+}
+
+function promptMouse () {
+    echo "Enable Mouse? [y/n]: "
+    read withMouse
+    if [[ $withMouse == "y" ]]; then
+        sudo systemctl start gpm.service
+    else
+        clear
+    fi
+}
+
+function consoleSelect () {
+    echo -e "Choose console to jump to:\n1) tty2 raw text(require re-login) - default\n2) tty3 userspace(require re-login)\n3) tty1 system raw text"
+    read -p "1-3: " toTerm
+    case "$toTerm" in
+        1) promptMouse; sudo chvt 2;;
+        2) sudo systemctl restart kmsconvt@tty3; sudo chvt 3;;
+        3) promptMouse; echo "Starting System Console..." ;;
+    esac
+    return 0
+}
+
+function consoleStartup () {
+    clear
+    neofetch
+    return 0
+}
+
+function fetchTop () {
+    [[ ! -z "$1" ]] && interval=$1 || interval=3
+    while [ true ]
+    do
+        clear
+        neofetch
+        read -t $interval willexit
+        case "$willexit" in
+            "") continue ;;
+            *) break ;;
+        esac
+    done
+}
+
+function shutdownWithUptime () {
+    echo "Startup: $(uptime -s), Duration: $(uptime --pretty), Shutdown: $(date +'%Y-%m-%D %H:%M:%S') @ $(uname -sr)" >> ~/.uptimelog && sudo shutdown now
+}
+
+consoleStartup
+alias configbash='$EDITOR ~/.bashrc'
+alias configi3='$EDITOR ~/.config/i3/config'
+alias configpicom='$EDITOR ~/.config/picom/picom.conf'
+alias configpolybar='$EDITOR ~/.config/polybar/config.ini'
+alias startlocalvnc='systemctl start --user kenryus-vnc'
+alias stoplocalvnc='systemctl stop --user kenryus-vnc'
+export EDITOR="nvim"
+[[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
+
