@@ -25,7 +25,7 @@ font pango:0xProto 10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-exec --no-startup-id "~/src/manbuild/picom/build/src/picom --config ~/.config/picom/picom.conf --use-damage --dbus --vsync"
+exec --no-startup-id "picom --config ~/.config/picom/picom.conf --use-damage --dbus --vsync"
 
 exec --no-startup-id fcitx5
 
@@ -108,7 +108,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+v split h
 
 # split in vertical orientation
 bindsym $mod+v split v
