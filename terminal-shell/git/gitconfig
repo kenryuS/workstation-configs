@@ -1,0 +1,12 @@
+[user]
+	email = kenryudev5894@gmail.com
+	name = Kenryu Shibata
+[core]
+	editor = nvim
+[init]
+	defaultBranch = master
+[commit]
+	gpgsign = true
+[alias]
+    stat = status
+

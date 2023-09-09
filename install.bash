@@ -25,3 +25,7 @@ ln -s terminal-shell/neofetch/config-shellstart.conf $configDir/neofetch/config-
 mkdir -p $HOME/.tmux
 ln -s terminal-shell/tmux/tmux.conf $HOME/.tmux.conf
 ln -s terminal-shell/bash/bashrc $HOME/.bashrc
+ln -s terminal-shell/git/gitconfig $HOME/.gitconfig
+
+ln -s wm/xorg-configs/Xresources $HOME/.Xresources
+ln -s wm/xorg-configs/xprofile $HOME/.xprofile

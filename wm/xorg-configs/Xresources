@@ -1,0 +1,29 @@
+Xcursor.theme: Reisen
+xterm*utf8 : 1
+xterm*locale : true
+xterm*selectToClipboard : true
+xterm*faceName : Source Code Pro, Source Code Pro Medium:style=Medium,Regular
+xterm*faceNameDoublesize : Noto Sans JP, Noto Sans JP Medium:style=Medium,Regular
+xterm*ximFont : -misc-fixed-medium-r-normal--14-130-75-75-c-140-jisx0208.1983-0
+xterm*faceSize : 11
+xterm*cjkWidth : true
+xterm*fontDoubleSize : true
+xterm*saveLines : 10000
+xterm*background: #292929
+xterm*foreground: #EEEEEE
+xterm*color0: #333333
+xterm*color1: #A94952
+xterm*color2: #83A949
+xterm*color3: #A99F49
+xterm*color4: #4983A9
+xterm*color5: #A94983
+xterm*color6: #49A99F
+xterm*color7: #AAAAAA
+xterm*color8: #666666
+xterm*color9: #ED6975
+xterm*color10: #B8ED69
+xterm*color11: #EDE169
+xterm*color12: #69B8ED
+xterm*color13: #ED69B8
+xterm*color14: #69EDE1
+xterm*color15: #DDDDDD
