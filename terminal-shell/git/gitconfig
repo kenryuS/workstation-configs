@@ -1,12 +1,18 @@
 [user]
 	email = kenryudev5894@gmail.com
 	name = Kenryu Shibata
+	signingKey = F85C19E0143E7094
 [core]
 	editor = nvim
 [init]
 	defaultBranch = master
 [commit]
-	gpgsign = true
+	gpgSign = true
 [alias]
     stat = status
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
